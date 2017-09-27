@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="ourFirstBean" class="com.thehit.domain.SongWriterImpl"></bean>
+	
+	<bean id="marysSong" class="com.thehit.domain.Song">
+			<constructor-arg name="name" value="Mary's farm"></constructor-arg>
+			<constructor-arg name="lyrics" value="Mary has a little lamb, her fleece is white as snow"></constructor-arg>
+	</bean>
+	
+	<bean id="mary" class="com.thehit.domain.SongWriterImpl">
+			<constructor-arg name="firstname" value="Mary"></constructor-arg>
+			<constructor-arg name="lastname" value="O'Shea"></constructor-arg>
+			<constructor-arg name="age" value="21"></constructor-arg>
+			<constructor-arg name="song" ref="marysSong"></constructor-arg>
+	</bean>
+	
+	<bean id="AbbeyTheatre" class="com.thehit.domain.Venue">
+			<constructor-arg name="name" value="Abbey Theatre"></constructor-arg>
+			<constructor-arg name="addressLine1" value="26 Abbey Street Lower"></constructor-arg>
+			<constructor-arg name="addressLine2" value="North Dublin, Dublin 1"></constructor-arg>
+			<constructor-arg name="country" value="Ireland"></constructor-arg>
+			<constructor-arg name="capacity" value="628"></constructor-arg>
+	</bean>
+	
+	
+	<bean id="setterBeanSong" class="com.thehit.domain.Song">
+			<property name="name" value="Setter Marys song"></property>
+			<property name="lyrics" value="Setter lyrics lyrics"></property>		
+	</bean>
+	
+	<bean id="setterSongwriter" class="com.thehit.domain.SongWriterImpl">
+		<property name="firstname" value="Billy"></property>
+		<property name="lastname" value="Walsh"></property>	
+		<property name="age" value="21"></property>	
+		<property name="song" ref="setterBeanSong"></property>
+	</bean>
+	
+	<bean id="currency" class="com.thehit.factories.CurrencyFactory" factory-method="createCurrency">
+		<constructor-arg name="country" value="Ireland"></constructor-arg>
+	</bean>
+	
+	<bean id="theStage" class="com.thehit.domain.Stage" 
+	factory-method="getInstance">  </bean> 
+	
+	<bean id="theStage1" class="com.thehit.domain.Stage" 
+	factory-method="getInstance"> </bean>
+	
+	<bean id="ticket" class="com.thehit.domain.Ticket">
+		<constructor-arg name="ticketClass" value="premium"></constructor-arg>
+		<constructor-arg name="ticketNumber" value="1"></constructor-arg>
+	</bean>
+	
+	<bean id="ticketPrototype" class="com.thehit.domain.Ticket" scope="prototype">
+		<constructor-arg name="ticketClass" value="premium"></constructor-arg>
+		<constructor-arg name="ticketNumber" value="2"></constructor-arg>
+	</bean> 
+	
+	<!-- start up and destroy example -->
+	<bean id="theStageInitDestroyExample" class="com.thehit.domain.Stage" factory-method="getInstance"
+	 init-method="init" destroy-method="destroy">
+	</bean> 
+	
+	<bean id="MarysSong" class="com.thehit.domain.Song">
+		<constructor-arg name="lyrics" value=" Oh Danny Boy, the pipes the pipes are calling. From glen to glen... "></constructor-arg>
+		<constructor-arg name="name" value="Oh Danny Boy"></constructor-arg>
+	</bean>
+	
+	<bean id="MarySongWriter" class="com.thehit.domain.SongWriterImpl">
+		<constructor-arg name="firstname" value="Mary"></constructor-arg>
+		<constructor-arg name="lastname" value="Jones"></constructor-arg>
+		<constructor-arg name="age" value="21"></constructor-arg>
+		<constructor-arg name="song" ref="MarysSong"></constructor-arg>	
+	</bean>
+	
+	<bean id="javaCollectionExample" class="com.thehit.domain.CollectionsExample">
+			
+			<!-- results in a setAddressList(java.util.List) call -->
+			<property name="instrumentList">
+				<list>
+					<value>Guitar</value>
+					<value>Piano</value>
+					<value>Violin</value>
+					<value>Violin</value>
+				</list>
+			</property>
+			
+			<!-- results in a setAddressSet(java.util.Set) call -->
+			<property name="instrumentSet">
+				<set>
+					<value>Guitar</value>
+					<value>Piano</value>
+					<value>Violin</value>
+					<value>Violin</value>
+				</set>
+			</property>
+			
+			<!-- results in a setAddressMap(java.util.Map) call -->
+			<property name="instrumentMap">
+				<map>
+					<entry key="1" value="Guitar"/>
+					<entry key="2" value="Piano"/>
+					<entry key="3" value="Violin"/>
+					<entry key="4" value="Violin"/>
+				</map>
+			</property>
+			
+			<!-- results in a setAddressProp(java.util.Properties) call -->
+			<property name="instrumentProp">
+				<props>
+					<prop key="one">Guitar</prop>
+					<prop key="two">Piano</prop>
+					<prop key="three">Violin</prop>
+					<prop key="four">Violin</prop>
+				</props>
+			</property>
+			
+	</bean>
+
+</beans>
